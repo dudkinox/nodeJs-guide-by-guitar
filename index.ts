@@ -1,16 +1,17 @@
-import exports, { Request, Response } from "express";
-import dotenv from "dotenv";
+import express from "express";
 
-dotenv.config();
+import Controller from "./controllers";
+import { PORT } from "./constants";
+import cors from "cors";
+import bodyParser from "body-parser";
 
-const port = process.env.PORT;
+const app = express();
 
-const app = exports();
+app.use(express.json());
+app.use(cors());
+app.use(bodyParser.json());
+app.use("/apis", Controller);
 
-app.get("/", (req: Request, res: Response) => {
-  return "test";
-});
-
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
+app.listen(PORT, () => {
+  console.log(`Server running on => http://localhost:${PORT}`);
 });
