@@ -53,7 +53,7 @@ export const createAccount = async (req: Request, res: Response) => {
       status: {
         code: 200,
         message: "success",
-        desecration: "create account success",
+        description: "create account success",
       },
       data: null,
     });
@@ -62,7 +62,7 @@ export const createAccount = async (req: Request, res: Response) => {
       status: {
         code: 400,
         message: e,
-        desecration: "Bad Request",
+        description: "Bad Request",
       },
       data: null,
     });
@@ -82,7 +82,7 @@ export const updateAccount = async (req: Request, res: Response) => {
       status: {
         code: 200,
         message: "success",
-        desecration: "update account success",
+        description: "update account success",
       },
       data: {
         timestamp: new Date().toISOString(),
@@ -93,7 +93,7 @@ export const updateAccount = async (req: Request, res: Response) => {
       status: {
         code: 400,
         message: e,
-        desecration: "Bad Request",
+        description: "Bad Request",
       },
       data: null,
     });
@@ -112,7 +112,7 @@ export const deleteAccount = async (req: Request, res: Response) => {
       status: {
         code: 200,
         message: "success",
-        desecration: "delete account success",
+        description: "delete account success",
       },
       data: {
         timestamp: new Date().toISOString(),
@@ -123,7 +123,7 @@ export const deleteAccount = async (req: Request, res: Response) => {
       status: {
         code: 400,
         message: e,
-        desecration: "Bad Request",
+        description: "Bad Request",
       },
       data: null,
     });
