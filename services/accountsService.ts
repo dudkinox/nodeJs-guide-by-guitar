@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import firebase from "../config/firebase";
 import AccountResponse from "../models/response/accountResponse";
-import AccountRequest from "./../models/request/accountRequest";
 
 const accountCollection = firebase.collection("account");
 
