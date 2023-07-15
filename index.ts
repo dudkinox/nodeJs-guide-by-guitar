@@ -1,6 +1,6 @@
 import express from "express";
 
-import Controller from "./controllers";
+import Controller from "./controllers/accountsController";
 import { PORT } from "./constants";
 import cors from "cors";
 import bodyParser from "body-parser";
