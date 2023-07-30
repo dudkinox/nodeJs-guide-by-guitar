@@ -6,26 +6,28 @@ export const getAllAccount = async (req: Request, res: Response) => {
   console.log(`getAllAccount start time ${new Date().toISOString()}`);
 
   try {
-    const response: AccountResponse[] = [];
-
     dbMysql.query("SELECT * FROM account", (err: any, result) => {
       if (err) throw err;
 
-      //   result.forEach((doc: any) => {
-      //     response.push({
-      //         id: doc.ID,
-      //         name: doc.NAME,
-      //     });
-      //   response.push(result);
-    });
+      const response: AccountResponse[] = [];
 
-    return res.status(200).json({
-      status: {
-        code: 200,
-        message: "success",
-        description: "get all account success",
-      },
-      data: response,
+      result.forEach((doc: any) => {
+        console.log(doc.NAME);
+
+        response.push({
+          id: doc.ID,
+          name: doc.NAME,
+        });
+      });
+
+      return res.status(200).json({
+        status: {
+          code: 200,
+          message: "success",
+          description: "get all account success",
+        },
+        data: response,
+      });
     });
   } catch (e: any) {
     return res.status(400).json({
