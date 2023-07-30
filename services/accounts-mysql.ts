@@ -1,22 +1,25 @@
 import { Request, Response } from "express";
-import AccountResponse from "../models/response/accountResponse";
+import AccountResponse, { Artist } from "../models/response/accountResponse";
 import dbMysql from "../config/mysql";
 
 export const getAllAccount = async (req: Request, res: Response) => {
   console.log(`getAllAccount start time ${new Date().toISOString()}`);
 
   try {
-    dbMysql.query("SELECT * FROM account", (err: any, result) => {
+    dbMysql.query("SELECT * FROM table_artist", (err: any, result) => {
       if (err) throw err;
 
-      const response: AccountResponse[] = [];
+      const response: Artist[] = [];
 
       result.forEach((doc: any) => {
-        console.log(doc.NAME);
+        console.log(doc);
 
         response.push({
-          id: doc.ID,
-          name: doc.NAME,
+          id: doc.id,
+          name: doc.name,
+          last_name: doc.lastname,
+          address: doc.address,
+          phone: doc.phone,
         });
       });
 
@@ -47,16 +50,31 @@ export const createAccount = async (req: Request, res: Response) => {
   try {
     const data = req.body;
 
-    // await accountCollection.doc().set(data);
+    dbMysql.query(
+      "INSERT INTO table_artist" +
+        "(`name`, `lastname`, `address`, `phone`)" +
+        "VALUES ('" +
+        data.name +
+        "', '" +
+        data.last_name +
+        "', '" +
+        data.address +
+        "', '" +
+        data.phone +
+        "')",
+      (err: any, result) => {
+        if (err) throw err;
 
-    return res.status(200).json({
-      status: {
-        code: 200,
-        message: "success",
-        description: "create account success",
-      },
-      data: null,
-    });
+        return res.status(200).json({
+          status: {
+            code: 200,
+            message: "success",
+            description: "create account success",
+          },
+          data: null,
+        });
+      }
+    );
   } catch (e: any) {
     return res.status(400).json({
       status: {
