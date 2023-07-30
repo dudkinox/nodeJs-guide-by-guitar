@@ -24,6 +24,6 @@ const initFirebaseAppAndGetDB = () => {
   return firebase.firestore(app);
 };
 
-const db = initFirebaseAppAndGetDB();
+const dbFirebase = initFirebaseAppAndGetDB();
 
-export default db;
+export default dbFirebase;

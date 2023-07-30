@@ -1,24 +1,22 @@
 import { Request, Response } from "express";
-import firebase from "../config/firebase";
 import AccountResponse from "../models/response/accountResponse";
-
-const accountCollection = firebase.collection("account");
+import dbMysql from "../config/mysql";
 
 export const getAllAccount = async (req: Request, res: Response) => {
   console.log(`getAllAccount start time ${new Date().toISOString()}`);
 
   try {
-    const data = await accountCollection.get();
-
     const response: AccountResponse[] = [];
 
-    data.forEach((doc) => {
-      response.push({
-        id: doc.id,
-        name: doc.data().name,
-        email: doc.data().email,
-        age: doc.data().age,
-      });
+    dbMysql.query("SELECT * FROM account", (err: any, result) => {
+      if (err) throw err;
+
+      //   result.forEach((doc: any) => {
+      //     response.push({
+      //         id: doc.ID,
+      //         name: doc.NAME,
+      //     });
+      //   response.push(result);
     });
 
     return res.status(200).json({
